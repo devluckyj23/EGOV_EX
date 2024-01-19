@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Language" content="ko" >
+<title>데이터 가져오기~</title>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+<!-- choose (when tempId가 있다면 update에 otherwise -tempId가 없다면 insert에 분기할것)  -->
+<c:choose>
+	<c:when test="${not empty result.tempId}">
+		<c:set var="actionUrl" value="/temp/update.do"/>
+	</c:when>
+	<c:otherwise>
+		<c:set var="actionUrl" value="/temp/insert.do"/> 
+	</c:otherwise>
+</c:choose>
+	
+
+<!-- 	<form action="/temp/insert.do" method="post" name="tempVO"> -->
+	<form action="${actionUrl}" method="post" name="tempVO">
+		<input type="hidden" name="tempId" value="${result.tempId}"/>
+		<label for="tempVal">값 정보 : </label>
+		<input type="text" id="tempVal" name="tempVal" value="${result.tempVal}"/>
+		<br/>
+		<c:choose>
+			<c:when test="${not empty result.tempId}">
+				<button type="submit">수정</button>
+			</c:when>
+			<c:otherwise>
+				<button type="submit">등록</button>
+			</c:otherwise>
+		</c:choose>
+
+<!-- c:out value = sysout 출력하는 문법 -->
+<!-- c:choose = if문과 같음 -->
+<!-- c:set = 변수에 대해 적어준다. -->
+
+	</form>
+</body>
+</html>
