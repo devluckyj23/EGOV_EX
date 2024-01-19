@@ -13,7 +13,7 @@
 		SELECT
 		 TEMP_ID
 		 , TEMP_VAL
-		 FROM lettemp3
+		 FROM lettemp3 
 		 WHERE TEMP_ID = #{tempId}
 	</select>
 	
